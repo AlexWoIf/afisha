@@ -7,7 +7,10 @@ from places.models import Place
 
 class UTF8JsonResponse(JsonResponse):
     def __init__(self, *args, json_dumps_params=None, **kwargs):
-        json_dumps_params = {"ensure_ascii": False, **(json_dumps_params or {})}
+        json_dumps_params = {
+            "ensure_ascii": False,
+            **(json_dumps_params or {})
+        }
         super().__init__(*args, json_dumps_params=json_dumps_params, **kwargs)
 
 
@@ -32,7 +35,7 @@ def index(request):
         lat = place.lat
         title = place.title
         place_id = place.place_id
-        details_url = f'{settings.STATIC_URL}places/{place_id}.json'
+        details_url = f'/places/{place.id}/'
         context['geo_json']['features'].append(
             createFeature(lng, lat, title, place_id, details_url)
         )
