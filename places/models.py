@@ -5,6 +5,9 @@ class Place(models.Model):
     title = models.CharField('Заголовок', max_length=200)
     description_short = models.TextField('Краткое описание')
     description_long = models.TextField('Полное описание')
+    place_id = models.CharField(
+        'PlaceID', max_length=200, blank=True, null=True
+    )
     lng = models.FloatField('Долгота')
     lat = models.FloatField('Широта')
 
