@@ -18,7 +18,7 @@ class Image(models.Model):
     )
     order = models.IntegerField('Порядковый индекс')
     image = models.ImageField(
-        'Изображение', upload_to='media', null=True, blank=True,
+        'Изображение', null=True, blank=True,
     )
 
     def __str__(self):
