@@ -6,4 +6,5 @@ from places.models import Place, Image
 class Place(admin.ModelAdmin):
     list_display = ('title', )
 
+
 admin.site.register(Image)
