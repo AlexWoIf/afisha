@@ -19,10 +19,13 @@ class Image(models.Model):
     place = models.ForeignKey(
         Place, on_delete=models.CASCADE, related_name="images",
     )
-    order = models.IntegerField('Позиция')
+    order = models.IntegerField('Позиция', default=0, )
     image = models.ImageField(
         'Изображение', null=True, blank=True,
     )
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return f'{self.order} {self.place.title}'
