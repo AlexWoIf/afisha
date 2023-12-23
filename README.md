@@ -4,7 +4,7 @@
 
 ![Куда пойти]([.gitbook/assets/site.pn](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png)
 
-[Демка сайта](https://devmanorg.github.io/where-to-go-frontend/).
+[Демка сайта](https://alexwolf.pythonanywhere.com/).
 
 ## Установка
 
