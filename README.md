@@ -2,7 +2,7 @@
 
 Фронтенд для будущего сайта о самых интересных местах в Москве. Авторский проект Артёма.
 
-![Куда пойти]([.gitbook/assets/site.pn](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png?raw=true)
+![Куда пойти](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png?raw=true)
 
 [Демка сайта](https://alexwolf.pythonanywhere.com/).
 
@@ -54,7 +54,7 @@ python manage.py runserver localhost:80
 python manage.py load_place <RAW_JSON url> [<RAW_JSON url> ...]
 ```
 
-Так же можно загрузить максимально возможно количество
+Так же можно загрузить максимально возможное количество из имеющихся в репозитории (одинаковые координаты недопустимы!)
 
 ```sh
 python manage.py load_place --repo
