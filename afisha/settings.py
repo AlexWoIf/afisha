@@ -33,7 +33,7 @@ SECRET_KEY = env.str('SECRET_KEY',
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', '*')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', 'alexwolf.pythonanywhere.com')
 
 
 # Application definition
@@ -136,7 +136,7 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 STATIC_URL = '/static/'
 
