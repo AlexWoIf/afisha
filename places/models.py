@@ -6,14 +6,14 @@ class Place(models.Model):
     title = models.CharField('Заголовок', max_length=200)
     description_short = models.TextField('Краткое описание')
     description_long = HTMLField('Полное описание')
-    place_id = models.CharField(
-        'PlaceID', max_length=200, blank=True, null=True
-    )
     lng = models.FloatField('Долгота')
     lat = models.FloatField('Широта')
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        unique_together = ['lng', 'lat', ]
 
 
 class Image(models.Model):
@@ -26,7 +26,8 @@ class Image(models.Model):
     )
 
     class Meta:
-        ordering = ['order']
+        ordering = ['order', ]
+        unique_together = ['place', 'order', ]
 
     def __str__(self):
         return f'{self.order} {self.place.title}'

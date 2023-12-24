@@ -2,7 +2,7 @@
 
 Фронтенд для будущего сайта о самых интересных местах в Москве. Авторский проект Артёма.
 
-![Куда пойти]([.gitbook/assets/site.pn](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png)
+![Куда пойти]([.gitbook/assets/site.pn](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png?raw=true)
 
 [Демка сайта](https://alexwolf.pythonanywhere.com/).
 
@@ -15,6 +15,7 @@ pip install -r requirements.txt
 ```
 
 Настройте таблицы БД командой:
+
 ```sh
 python manage.py migrate
 ```
@@ -38,8 +39,25 @@ python manage.py createsuperuser
 ## Запуск
 
 Запустите командой:
+
 ```sh
 python manage.py runserver localhost:80
+```
+
+## Загрузка данных из JSON-файлов
+
+Данные об интересных местах могут быть загружены из JSON-файлов. Образцы таких файлов расположены в [учебном репозитории](https://github.com/devmanorg/where-to-go-places/tree/master/places)
+
+Вы можете загрузить любое место (либо несколько) указав RAW-ссылку(и) на нужный(ые) JSON-файл(ы):
+
+```sh
+python manage.py load_place <RAW_JSON url> [<RAW_JSON url> ...]
+```
+
+Так же можно загрузить максимально возможно количество
+
+```sh
+python manage.py load_place --repo
 ```
 
 ## Цели проекта

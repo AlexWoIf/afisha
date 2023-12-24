@@ -33,7 +33,7 @@ def index(request):
         lng = place.lng
         lat = place.lat
         title = place.title
-        place_id = place.place_id
+        place_id = place.id
         details_url = f'/places/{place.id}/'
         context['geo_json']['features'].append(
             createFeature(lng, lat, title, place_id, details_url)
