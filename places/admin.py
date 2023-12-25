@@ -12,10 +12,9 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def get_image_preview(self, obj):
         return format_html(
-            '<img src="{url}" width="{width}" height={height} />',
+            '<img src="{url}" style="max-height:200px;max-width:350px;'
+            'width: expression(this.width > 350 ? 350: true);" />',
             url=obj.image.url,
-            width=obj.image.width*150/obj.image.height,
-            height=150,
         )
     get_image_preview.short_description = 'Миниатюра картинки'
 
@@ -35,9 +34,8 @@ class ImageAdmin(admin.ModelAdmin):
 
     def get_image_preview(self, obj):
         return format_html(
-            '<img src="{url}" width="{width}" height={height} />',
+            '<img src="{url}" style="max-height:200px; max-width:350px; '
+            'width: expression(this.width > 350 ? 350: true);" />',
             url=obj.image.url,
-            width=obj.image.width*150/obj.image.height,
-            height=150,
         )
     get_image_preview.short_description = 'Миниатюра картинки'
