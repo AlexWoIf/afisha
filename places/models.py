@@ -22,9 +22,7 @@ class Image(models.Model):
         verbose_name='Локация',
     )
     order = models.IntegerField('Позиция', default=0, )
-    image = models.ImageField(
-        'Изображение', null=True, blank=True,
-    )
+    image = models.ImageField('Изображение', )
 
     class Meta:
         ordering = ['order', ]
