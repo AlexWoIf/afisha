@@ -14,7 +14,7 @@ class UTF8JsonResponse(JsonResponse):
 
 
 def index(request):
-    def createFeature(lng, lat, title, place_id, details_url):
+    def create_feature(lng, lat, title, place_id, details_url):
         return {
             'type': 'Feature',
             'geometry': {
@@ -36,7 +36,7 @@ def index(request):
         place_id = place.id
         details_url = f'/places/{place.id}/'
         context['geo_json']['features'].append(
-            createFeature(lng, lat, title, place_id, details_url)
+            create_feature(lng, lat, title, place_id, details_url)
         )
     return render(request, 'index.html', context)
 
