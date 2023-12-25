@@ -27,6 +27,7 @@ class Image(models.Model):
     class Meta:
         ordering = ['order', ]
         unique_together = ['place', 'order', ]
+        index_together = ['place', 'order', ]
 
     def __str__(self):
         return f'{self.order} {self.place.title}'
