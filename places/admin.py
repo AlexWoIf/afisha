@@ -21,6 +21,22 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    list_display = ('title', )
+    list_display = ['title', ]
     search_fields = ['title', ]
     inlines = [ImageInline, ]
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['place', 'order', ]
+    autocomplete_fields = ['place', ]
+    readonly_fields = ["get_preview", ]
+
+    def get_preview(self, obj):
+        return format_html(
+            '<img src="{url}" width="{width}" height={height} />',
+            url=obj.image.url,
+            width=obj.image.width*150/obj.image.height,
+            height=150,
+        )
+    get_preview.short_description = 'Миниатюра картинки'
