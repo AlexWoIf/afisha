@@ -21,8 +21,8 @@ def load_place(place_url):
         payload = response.json()
         place, created = Place.objects.get_or_create(
             title=payload.get('title'),
-            description_short=payload.get('description_short'),
-            description_long=payload.get('description_long'),
+            short_description=payload.get('description_short'),
+            long_description=payload.get('description_long'),
             lng=payload.get('coordinates').get('lng'),
             lat=payload.get('coordinates').get('lat'),
         )

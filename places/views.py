@@ -45,8 +45,8 @@ def show_place(request, id):
     place = get_object_or_404(Place, id=id)
     place_json_dict = {'title': place.title}
     place_json_dict['imgs'] = [img.image.url for img in place.images.all()]
-    place_json_dict['description_short'] = place.description_short
-    place_json_dict['description_long'] = place.description_long
+    place_json_dict['description_short'] = place.short_description
+    place_json_dict['description_long'] = place.long_description
     place_json_dict['coordinates'] = {
         'lat': place.lat,
         'lng': place.lng,
