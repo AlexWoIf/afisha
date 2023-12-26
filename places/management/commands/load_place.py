@@ -1,10 +1,12 @@
 import imghdr
+from urllib.parse import quote, urljoin
 
 import requests
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError
+
 from places.models import Place, Image
 
 
@@ -42,11 +44,11 @@ def load_place(place_url):
             response = requests.get(img_url)
             response.raise_for_status()
             img_bytes = response.content
-            img_filename = f'image.{imghdr.what("",h=img_bytes)}'
-            img = Image(place=place, order=order)
-            img.image.save(img_filename,
-                           ContentFile(img_bytes),
-                           save=True, )
+            img_filename = f'{place.id}.{imghdr.what("",h=img_bytes)}'
+            Image.objects.create(
+                place=place, order=order,
+                image=ContentFile(img_bytes, name=img_filename),
+            )
         except requests.exceptions.HTTPError:
             return
 
@@ -68,8 +70,6 @@ class Command(BaseCommand):
         response = requests.get(REPO_URL)
         response.raise_for_status()
         items = response.json()['payload']['tree']['items']
-        from urllib.parse import quote
         for item in items:
-            load_place(RAW_URL_PREFIX + quote(item['path']))
-
+            load_place(urljoin(RAW_URL_PREFIX, quote(item['path'])))
         return
