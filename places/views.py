@@ -5,15 +5,6 @@ from django.urls import reverse
 from places.models import Place
 
 
-class UTF8JsonResponse(JsonResponse):
-    def __init__(self, *args, json_dumps_params=None, **kwargs):
-        json_dumps_params = {
-            "ensure_ascii": False,
-            **(json_dumps_params or {})
-        }
-        super().__init__(*args, json_dumps_params=json_dumps_params, **kwargs)
-
-
 def index(request):
     def create_feature(lng, lat, title, place_id, details_url):
         return {
@@ -54,4 +45,7 @@ def show_place(request, id):
             'lng': place.lng,
         },
     }
-    return UTF8JsonResponse(place_json_dict, json_dumps_params={'indent': 2})
+    return JsonResponse(
+        place_json_dict,
+        json_dumps_params={'ensure_ascii': False, 'indent': 2}
+    )
