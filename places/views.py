@@ -6,30 +6,28 @@ from places.models import Place
 
 
 def index(request):
-    def create_feature(lng, lat, title, place_id, details_url):
+    def create_feature(place):
         return {
             'type': 'Feature',
             'geometry': {
                     'type': 'Point',
-                    'coordinates': [lng, lat, ],
+                    'coordinates': [place.lng, place.lat, ],
             },
             'properties': {
-                'title': title,
-                'placeId': place_id,
-                'detailsUrl': details_url,
+                'title': place.title,
+                'placeId': place.id,
+                'detailsUrl': reverse('place', args=[place.id, ]),
             },
         }
 
-    context = {'geo_json': {'type': 'FeatureCollection', 'features': []}}
-    for place in Place.objects.all():
-        lng = place.lng
-        lat = place.lat
-        title = place.title
-        place_id = place.id
-        details_url = reverse('place', args=[place.id, ])
-        context['geo_json']['features'].append(
-            create_feature(lng, lat, title, place_id, details_url)
-        )
+    context = {
+        'geo_json': {
+            'type': 'FeatureCollection',
+            'features': [
+                create_feature(place) for place in Place.objects.all()
+            ]
+        }
+    }
     return render(request, 'index.html', context)
 
 
