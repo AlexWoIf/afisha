@@ -44,12 +44,14 @@ def index(request):
 
 def show_place(request, id):
     place = get_object_or_404(Place.objects.select_related(), id=id)
-    place_json_dict = {'title': place.title}
-    place_json_dict['imgs'] = [img.image.url for img in place.images.all()]
-    place_json_dict['description_short'] = place.short_description
-    place_json_dict['description_long'] = place.long_description
-    place_json_dict['coordinates'] = {
-        'lat': place.lat,
-        'lng': place.lng,
+    place_json_dict = {
+        'title': place.title,
+        'imgs': [img.image.url for img in place.images.all()],
+        'description_short': place.short_description,
+        'description_long': place.long_description,
+        'coordinates': {
+            'lat': place.lat,
+            'lng': place.lng,
+        },
     }
     return UTF8JsonResponse(place_json_dict, json_dumps_params={'indent': 2})
