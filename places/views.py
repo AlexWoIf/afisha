@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.urls import reverse
 from places.models import Place
 
 
@@ -34,7 +35,7 @@ def index(request):
         lat = place.lat
         title = place.title
         place_id = place.id
-        details_url = f'/places/{place.id}/'
+        details_url = reverse('place', args=[place.id, ])
         context['geo_json']['features'].append(
             create_feature(lng, lat, title, place_id, details_url)
         )
