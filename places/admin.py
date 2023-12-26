@@ -1,14 +1,16 @@
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
+from adminsortable2.admin import SortableTabularInline
 from django.contrib import admin
 from django.utils.html import format_html
 from places.models import Place, Image
 
 
-class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
+class ImageInline(SortableTabularInline):
     model = Image
     extra = 1
     fields = ('image', "get_image_preview", 'order', )
     readonly_fields = ["get_image_preview", ]
+    ordering = ['order']
 
     def get_image_preview(self, obj):
         return format_html(
