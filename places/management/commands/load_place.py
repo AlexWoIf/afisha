@@ -19,12 +19,15 @@ def load_place(place_url):
         response = requests.get(place_url)
         response.raise_for_status()
         payload = response.json()
-        place, created = Place.objects.get_or_create(
+
+        place, created = Place.objects.update_or_create(
             title=payload.get('title'),
-            short_description=payload.get('description_short'),
-            long_description=payload.get('description_long'),
             lng=payload.get('coordinates').get('lng'),
             lat=payload.get('coordinates').get('lat'),
+            defaults={
+                'short_description': payload.get('description_short'),
+                'long_description': payload.get('description_long'),
+            }
         )
         if not created:
             return
