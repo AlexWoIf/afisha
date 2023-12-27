@@ -5,8 +5,8 @@ from django.utils.html import format_html
 from places.models import Image, Place
 
 
-PREVIEW_MAX_HEIGHT = '350px'
-PREVIEW_MAX_WIDTH = '200px'
+PREVIEW_MAX_HEIGHT = '200px'
+PREVIEW_MAX_WIDTH = '350px'
 
 
 class ImageInline(SortableTabularInline):
