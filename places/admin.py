@@ -1,8 +1,12 @@
-from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
-from adminsortable2.admin import SortableTabularInline
+from adminsortable2.admin import SortableAdminBase, SortableTabularInline
 from django.contrib import admin
 from django.utils.html import format_html
-from places.models import Place, Image
+
+from places.models import Image, Place
+
+
+PREVIEW_MAX_HEIGHT = '350px'
+PREVIEW_MAX_WIDTH = '200px'
 
 
 class ImageInline(SortableTabularInline):
@@ -14,8 +18,8 @@ class ImageInline(SortableTabularInline):
 
     def get_image_preview(self, obj):
         return format_html(
-            '<img src="{url}" style="max-height:200px;max-width:350px;'
-            'width: expression(this.width > 350 ? 350: true);" />',
+            '<img src="{url}" style="max-height: '
+            f'{PREVIEW_MAX_HEIGHT}; max-width: {PREVIEW_MAX_WIDTH};" /> ',
             url=obj.image.url,
         )
     get_image_preview.short_description = 'Миниатюра картинки'
@@ -36,8 +40,8 @@ class ImageAdmin(admin.ModelAdmin):
 
     def get_image_preview(self, obj):
         return format_html(
-            '<img src="{url}" style="max-height:200px; max-width:350px; '
-            'width: expression(this.width > 350 ? 350: true);" />',
+            '<img src="{url}" style="max-height: '
+            f'{PREVIEW_MAX_HEIGHT}; max-width: {PREVIEW_MAX_WIDTH};" /> ',
             url=obj.image.url,
         )
     get_image_preview.short_description = 'Миниатюра картинки'
