@@ -21,12 +21,11 @@ class Image(models.Model):
         Place, on_delete=models.CASCADE, related_name="images",
         verbose_name='Локация',
     )
-    order = models.IntegerField('Позиция', default=0, )
+    order = models.IntegerField('Позиция', default=0, db_index=True, )
     image = models.ImageField('Изображение', )
 
     class Meta:
         ordering = ['order', ]
-        index_together = ['place', 'order', ]
 
     def __str__(self):
         return f'{self.order} {self.place.title}'
