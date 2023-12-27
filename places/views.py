@@ -33,7 +33,7 @@ def index(request):
 
 def show_place(request, id):
     place = get_object_or_404(Place.objects.prefetch_related('images'), id=id)
-    place_json_dict = {
+    place_serialized = {
         'title': place.title,
         'imgs': [img.image.url for img in place.images.all()],
         'description_short': place.short_description,
@@ -44,6 +44,6 @@ def show_place(request, id):
         },
     }
     return JsonResponse(
-        place_json_dict,
+        place_serialized,
         json_dumps_params={'ensure_ascii': False, 'indent': 2}
     )
